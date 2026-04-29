@@ -71,6 +71,27 @@
   .affil-role { font-size: 1rem; color: var(--cream); font-weight: 400; margin-bottom: 0.5rem; line-height: 1.4; }
   .affil-detail { font-size: 0.8rem; color: var(--mist); font-weight: 300; }
 
+  /* THIN LANDSCAPE BANNERS (between sections) */
+  .landscape-banner { width: 100%; aspect-ratio: 20 / 3; overflow: hidden; background: var(--moss); display: block; position: relative; }
+  .landscape-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .banner-credit {
+    position: absolute;
+    bottom: 0.55rem;
+    right: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+    pointer-events: none;
+    z-index: 1;
+  }
+  @media (max-width: 600px) {
+    .landscape-banner { aspect-ratio: 10 / 3; }
+    .banner-credit { font-size: 8px; bottom: 0.45rem; right: 0.65rem; }
+  }
+
   /* FROM THE FIELD - manila folder shelf */
   .field { background: linear-gradient(180deg, #f4ede0 0%, #ebe2cd 100%); padding: 7rem 0 8rem; position: relative; }
   .field::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(74,63,47,0.08); }
@@ -380,6 +401,15 @@
   </div>
 </section>
 
+<!-- BANNER 1: between About and Work. Swap the stock image by uploading
+     a file named exactly  landscape-banner-1.jpeg  to this folder. -->
+<aside class="landscape-banner" aria-label="Natural landscape transition">
+  <img src="landscape-banner-1.jpeg"
+       alt="Sunlit green forest interior"
+       onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&h=360&q=85';">
+  <span class="banner-credit">Original photography, ZDR</span>
+</aside>
+
 <section class="work" id="work">
   <div class="container">
     <p class="section-label" style="color:var(--mist)">Experience &amp; Affiliations</p>
@@ -657,6 +687,15 @@
     })();
   </script>
 </section>
+
+<!-- BANNER 2: between Field Notes and Research. Swap the stock image by
+     uploading a file named exactly  landscape-banner-2.jpeg  to this folder. -->
+<aside class="landscape-banner" aria-label="Natural landscape transition">
+  <img src="landscape-banner-2.jpeg"
+       alt="Open natural landscape"
+       onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2400&h=360&q=85';">
+  <span class="banner-credit">Original photography, ZDR</span>
+</aside>
 
 <section class="research" id="research">
   <div class="container">
