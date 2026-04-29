@@ -71,35 +71,154 @@
   .affil-role { font-size: 1rem; color: var(--cream); font-weight: 400; margin-bottom: 0.5rem; line-height: 1.4; }
   .affil-detail { font-size: 0.8rem; color: var(--mist); font-weight: 300; }
 
-  /* FROM THE FIELD */
+  /* FROM THE FIELD - manila folder shelf */
   .field { background: linear-gradient(180deg, #f4ede0 0%, #ebe2cd 100%); padding: 7rem 0 8rem; position: relative; }
   .field::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(74,63,47,0.08); }
   .field-intro { font-size: 1rem; color: #5a5a4a; max-width: 620px; margin-top: -1.25rem; margin-bottom: 1rem; font-weight: 300; line-height: 1.75; }
-  .field-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-top: 3.5rem; }
-  .field-entry { background: var(--paper); position: relative; padding: 2.5rem 2.75rem 2.75rem; border-radius: 3px; box-shadow: 0 2px 4px rgba(74,63,47,0.06), 0 22px 48px -22px rgba(74,63,47,0.28); transform: rotate(-0.3deg); transition: transform 0.4s ease, box-shadow 0.4s ease; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, var(--rule) 31px, var(--rule) 32px); background-size: 100% 32px; background-position: 0 4.25rem; }
-  .field-entry:nth-child(even) { transform: rotate(0.4deg); }
-  .field-entry:hover { transform: rotate(0); box-shadow: 0 4px 8px rgba(74,63,47,0.08), 0 26px 56px -22px rgba(74,63,47,0.32); }
-  .field-entry::before { content: ""; position: absolute; top: 0; bottom: 0; left: 4rem; width: 1px; background: var(--margin-rule); }
-  .field-entry::after { content: ""; position: absolute; top: 1rem; left: 0.85rem; bottom: 1rem; width: 18px; background-image: radial-gradient(circle at center, rgba(74,63,47,0.18) 0, rgba(74,63,47,0.18) 3px, transparent 3.5px); background-size: 18px 36px; background-repeat: repeat-y; opacity: 0.55; }
-  .field-entry-tape { position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-1.5deg); width: 120px; height: 24px; background: rgba(232,213,176,0.7); border-left: 1px dashed rgba(74,63,47,0.18); border-right: 1px dashed rgba(74,63,47,0.18); box-shadow: 0 1px 2px rgba(74,63,47,0.12); z-index: 2; }
-  .field-entry-header { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.5rem; padding-left: 4.75rem; min-height: 32px; position: relative; z-index: 1; }
-  .field-flag { font-size: 1.6rem; line-height: 1; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.08)); }
-  .field-location { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--bark); text-transform: uppercase; opacity: 0.75; }
-  .field-date { font-family: 'Caveat', cursive; font-size: 1.05rem; color: rgba(42,58,85,0.55); margin-left: auto; }
-  .field-headline { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--forest); line-height: 1.3; padding-left: 4.75rem; margin-bottom: 1.75rem; font-weight: 400; position: relative; z-index: 1; }
-  .field-images { display: grid; gap: 0.85rem; margin: 0 0 1.75rem 0; padding-left: 4.75rem; position: relative; z-index: 1; }
+  .field-controls { display: flex; gap: 1.5rem; align-items: center; margin-top: 2.5rem; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(74,63,47,0.55); }
+  .field-control-btn { background: none; border: none; padding: 0.35rem 0; color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; border-bottom: 1px solid rgba(74,63,47,0.3); transition: color 0.2s, border-color 0.2s; }
+  .field-control-btn:hover { color: var(--amber); border-color: var(--amber); }
+  .field-control-divider { color: rgba(74,63,47,0.3); }
+
+  .field-shelf { margin-top: 1.25rem; max-width: 980px; margin-left: auto; margin-right: auto; padding-top: 1rem; position: relative; border-top: 1px solid rgba(74,63,47,0.12); }
+
+  /* Each entry IS a manila folder */
+  .field-entry {
+    position: relative;
+    background: linear-gradient(180deg, #e3c897 0%, #d4b274 100%);
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 30%, transparent 70%, rgba(74,63,47,0.10) 100%),
+      repeating-linear-gradient(45deg, transparent 0, transparent 3px, rgba(74,63,47,0.025) 3px, rgba(74,63,47,0.025) 4px);
+    border: 1px solid rgba(110,80,35,0.32);
+    border-radius: 4px;
+    margin-top: -1px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 1px 2px rgba(74,63,47,0.06);
+    transition: box-shadow 0.35s ease;
+  }
+  .field-entry::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #b89456 0%, #9c7536 100%);
+    border-radius: 4px 0 0 4px;
+    pointer-events: none;
+  }
+  .field-entry[open] {
+    z-index: 2;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.45),
+      0 6px 14px rgba(74,63,47,0.16),
+      0 24px 48px -22px rgba(74,63,47,0.45);
+  }
+  .field-entry summary { list-style: none; outline: none; }
+  .field-entry summary::-webkit-details-marker { display: none; }
+
+  /* Folder tab — visible whether open or closed */
+  .field-tab {
+    display: grid;
+    grid-template-columns: auto auto auto 1fr auto;
+    align-items: center;
+    gap: 1.1rem;
+    padding: 1.05rem 1.5rem 1.05rem 1.75rem;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+  .field-tab:hover { background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 100%); }
+  .field-entry > summary:focus-visible > .field-tab { box-shadow: inset 0 0 0 2px var(--amber); border-radius: 4px; }
+
+  .field-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: rgba(74,63,47,0.65);
+    text-transform: uppercase;
+    background: rgba(253, 250, 240, 0.78);
+    padding: 0.3rem 0.55rem;
+    border: 1px solid rgba(74,63,47,0.22);
+    border-radius: 1px;
+    white-space: nowrap;
+    box-shadow: 0 1px 1px rgba(74,63,47,0.06);
+  }
+  .field-tab-flag { font-size: 1.4rem; line-height: 1; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.06)); }
+  .field-tab-location { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.22em; color: var(--bark); text-transform: uppercase; }
+  .field-tab-preview {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(26,35,24,0.62);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    transition: opacity 0.25s ease;
+  }
+  .field-entry[open] > summary > .field-tab > .field-tab-preview { opacity: 0; }
+
+  .field-tab-chevron {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bark);
+    font-size: 0.7rem;
+    background: rgba(253, 250, 240, 0.6);
+    border: 1px solid rgba(74,63,47,0.22);
+    border-radius: 50%;
+    transition: transform 0.4s ease, background 0.2s ease;
+    flex-shrink: 0;
+  }
+  .field-entry[open] > summary > .field-tab > .field-tab-chevron { transform: rotate(180deg); background: var(--paper); }
+
+  /* Animated content wrapper — uses grid-template-rows trick for smooth height */
+  .field-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s ease; }
+  .field-entry[open] > .field-content { grid-template-rows: 1fr; }
+  .field-content-inner { overflow: hidden; }
+
+  /* Notebook paper revealed inside the open folder */
+  .field-paper {
+    background: var(--paper);
+    margin: 0.25rem 0.5rem 0.5rem;
+    padding: 2.25rem 2.5rem 2.5rem;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 3px rgba(74,63,47,0.10);
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, var(--rule) 31px, var(--rule) 32px);
+    background-size: 100% 32px;
+    background-position: 0 3rem;
+    position: relative;
+  }
+  .field-paper::before { content: ""; position: absolute; top: 0; bottom: 0; left: 4rem; width: 1px; background: var(--margin-rule); }
+  .field-paper::after {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    left: 0.85rem;
+    bottom: 1rem;
+    width: 18px;
+    background-image: radial-gradient(circle at center, rgba(74,63,47,0.18) 0, rgba(74,63,47,0.18) 3px, transparent 3.5px);
+    background-size: 18px 36px;
+    background-repeat: repeat-y;
+    opacity: 0.45;
+  }
+
+  .field-meta { display: flex; align-items: center; gap: 0.85rem; padding-left: 4.75rem; margin-bottom: 0.5rem; position: relative; z-index: 1; min-height: 1.5rem; }
+  .field-date { font-family: 'Caveat', cursive; font-size: 1.1rem; color: rgba(42,58,85,0.6); }
+  .field-headline { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--forest); line-height: 1.3; padding-left: 4.75rem; margin-bottom: 1.5rem; font-weight: 400; position: relative; z-index: 1; }
+  .field-images { display: grid; gap: 0.85rem; margin: 0 0 1.5rem 0; padding-left: 4.75rem; position: relative; z-index: 1; }
   .field-images.cols-1 { grid-template-columns: 1fr; max-width: 520px; }
   .field-images.cols-2 { grid-template-columns: 1fr 1fr; }
   .field-images.cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .field-image-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--paper-shade); border: 1px solid rgba(74,63,47,0.10); box-shadow: 0 2px 6px rgba(74,63,47,0.14); transform: rotate(-0.5deg); }
-  .field-image-wrap:nth-child(even) { transform: rotate(0.45deg); }
+  .field-image-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--paper-shade); border: 1px solid rgba(74,63,47,0.10); box-shadow: 0 2px 6px rgba(74,63,47,0.14); }
   .field-image-wrap::before { content: attr(data-filename); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(74,63,47,0.45); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; text-align: center; padding: 1rem; background: repeating-linear-gradient(45deg, #f0e8d2 0, #f0e8d2 10px, #ebe2cd 10px, #ebe2cd 20px); }
   .field-image-wrap img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
   .field-notes { font-family: 'Caveat', 'Kalam', cursive; font-size: 1.4rem; line-height: 1.55; color: var(--ink); padding-left: 4.75rem; padding-top: 0.25rem; max-width: 64ch; position: relative; z-index: 1; }
   .field-notes p { margin-bottom: 0.55rem; }
   .field-notes p:last-child { margin-bottom: 0; }
   .field-signature { font-family: 'Caveat', cursive; font-size: 1.15rem; color: rgba(42,58,85,0.6); padding-left: 4.75rem; margin-top: 1.5rem; font-style: italic; position: relative; z-index: 1; }
-  .field-add-note { text-align: center; margin-top: 4rem; font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(74,63,47,0.5); letter-spacing: 0.2em; text-transform: uppercase; }
+  .field-add-note { text-align: center; margin-top: 3rem; font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(74,63,47,0.5); letter-spacing: 0.2em; text-transform: uppercase; }
 
   .research { background: var(--sand); }
   .research-item { border-top: 1px solid rgba(74,63,47,0.2); padding: 2rem 0; display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start; }
@@ -139,10 +258,12 @@
     .resources-grid { grid-template-columns: 1fr; }
     .marquee-track { gap: 2.25rem; }
     .marquee-species { font-size: 1.15rem; }
-    .field-entry { padding: 1.75rem 1.5rem 2rem; }
-    .field-entry::before { left: 2rem; }
-    .field-entry::after { display: none; }
-    .field-entry-header, .field-headline, .field-images, .field-notes, .field-signature { padding-left: 2.5rem; }
+    .field-tab { grid-template-columns: auto auto 1fr auto; padding: 0.95rem 1rem 0.95rem 1.25rem; gap: 0.85rem; }
+    .field-tab-preview { display: none; }
+    .field-paper { padding: 1.5rem 1.25rem 1.75rem; margin: 0.25rem 0.25rem 0.25rem; }
+    .field-paper::after { display: none; }
+    .field-paper::before { left: 1.5rem; }
+    .field-meta, .field-headline, .field-images, .field-notes, .field-signature { padding-left: 2.25rem; }
     .field-images.cols-2, .field-images.cols-3 { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 600px) {
@@ -162,12 +283,12 @@
 <nav>
   <span class="nav-name">Zachary Dvornicky-Raymond, DVM</span>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#field">Field Notes</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#resources">Resources</a></li>
-    <li><a href="#connect">Connect</a></li>
+    <li><a href="https://zdr-site.vercel.app/#about">About</a></li>
+    <li><a href="https://zdr-site.vercel.app/#work">Work</a></li>
+    <li><a href="https://zdr-site.vercel.app/#field">Field Notes</a></li>
+    <li><a href="https://zdr-site.vercel.app/#research">Research</a></li>
+    <li><a href="https://zdr-site.vercel.app/#resources">Resources</a></li>
+    <li><a href="https://zdr-site.vercel.app/#connect">Connect</a></li>
   </ul>
 </nav>
 
@@ -176,7 +297,7 @@
     <p class="hero-eyebrow">Wildlife Veterinarian · Conservation Leader · One Health Professional</p>
     <h1 class="hero-name">Zachary<br><em>Dvornicky-Raymond</em></h1>
     <p class="hero-tagline">Working at the intersection of human, animal, and environmental health to address the most pressing challenges facing our living planet.</p>
-    <a href="#about" class="hero-cta">Learn more →</a>
+    <a href="https://zdr-site.vercel.app/#about" class="hero-cta">Learn more →</a>
   </div>
   <div class="hero-right">
     <img class="hero-image"
@@ -261,7 +382,7 @@
 
 <section class="work" id="work">
   <div class="container">
-    <p class="section-label" style="color:var(--mist)">Experience & Affiliations</p>
+    <p class="section-label" style="color:var(--mist)">Experience &amp; Affiliations</p>
     <h2 class="section-heading">Key roles<br>and career highlights</h2>
     <div class="affil-grid">
       <div class="affil-card"><p class="affil-org">Save Pangolins</p><p class="affil-role">Program Manager</p><p class="affil-detail">Lead strategic planning and programmatic work to protect all eight pangolin species from extinction.</p></div>
@@ -282,168 +403,259 @@
 
 <!--
   ============================================================================
-  FROM THE FIELD
+  FROM THE FIELD — manila folder shelf
   ----------------------------------------------------------------------------
+  Each entry is a <details> element styled as a manila file folder. Click the
+  tab to expand/collapse. Multiple folders can be open at once. Entry 1 has the
+  `open` attribute so it's expanded by default.
+
   How to add a new entry:
-    1. Copy any <article class="field-entry"> block below.
-    2. Update the flag emoji, location, headline, notes, and image filenames.
+    1. Copy any <details class="field-entry"> block below.
+    2. Update No. {NN}, the flag emoji + aria-label, location, preview snippet,
+       headline, notes, date, and image filenames.
     3. Drop the images into this folder using the naming pattern:
          field-entry-{N}a.jpeg, field-entry-{N}b.jpeg, field-entry-{N}c.jpeg
-       where {N} is the entry number. Each entry can have 1, 2, or 3 images —
-       just set the wrapper class to cols-1 / cols-2 / cols-3 to match.
-    4. Images are auto-cropped to a consistent 4:5 portrait ratio. Upload at
-       any size; the browser scales and centers them inside the frame.
-    5. Until a real image exists, the placeholder shows the expected filename
-       so it's obvious what to drop in.
+       Each entry can have 1, 2, or 3 images — match cols-1 / cols-2 / cols-3.
+    4. Images are auto-cropped to a 4:5 portrait ratio. Upload at any size.
   ============================================================================
 -->
 <section class="field" id="field">
   <div class="container">
     <p class="section-label">From the Field</p>
     <h2 class="section-heading">Field notes &amp;<br>moments worth sharing</h2>
-    <p class="field-intro">Stories, observations, and photographs from on-the-ground conservation work — the kind of stuff that doesn't make it into the published papers.</p>
+    <p class="field-intro">Stories, observations, and photographs from on-the-ground conservation work — the kind of stuff that doesn't make it into the published papers. Click any folder to open it.</p>
 
-    <div class="field-grid">
+    <div class="field-controls">
+      <button type="button" class="field-control-btn" data-field-action="expand">Open all</button>
+      <span class="field-control-divider">·</span>
+      <button type="button" class="field-control-btn" data-field-action="collapse">Close all</button>
+    </div>
+
+    <div class="field-shelf">
 
       <!-- ENTRY 1 -->
-      <article class="field-entry">
-        <div class="field-entry-tape" aria-hidden="true"></div>
-        <div class="field-entry-header">
-          <span class="field-flag" role="img" aria-label="Zimbabwe">🇿🇼</span>
-          <span class="field-location">Zimbabwe · Victoria Falls</span>
-          <span class="field-date">July '25</span>
+      <details class="field-entry" open>
+        <summary>
+          <div class="field-tab">
+            <span class="field-num">No. 01</span>
+            <span class="field-tab-flag" role="img" aria-label="Zimbabwe">🇿🇼</span>
+            <span class="field-tab-location">Zimbabwe · Victoria Falls</span>
+            <span class="field-tab-preview">A leopard at the riverbank, and a Forum for the future of lions</span>
+            <span class="field-tab-chevron" aria-hidden="true">▼</span>
+          </div>
+        </summary>
+        <div class="field-content">
+          <div class="field-content-inner">
+            <div class="field-paper">
+              <div class="field-meta">
+                <span class="field-date">July '25</span>
+              </div>
+              <h3 class="field-headline">A leopard at the riverbank, and a Forum for the future of lions</h3>
+              <div class="field-images cols-2">
+                <figure class="field-image-wrap" data-filename="field-entry-1a.jpeg">
+                  <img src="field-entry-1a.jpeg" alt="Leopard watching impala across the river at dusk" onerror="this.style.display='none';">
+                </figure>
+                <figure class="field-image-wrap" data-filename="field-entry-1b.jpeg">
+                  <img src="field-entry-1b.jpeg" alt="EWCL team smiling together at LFF 2025" onerror="this.style.display='none';">
+                </figure>
+              </div>
+              <div class="field-notes">
+                <p>We quietly watched this leopardess hold the riverbank at golden hour — six puku on the far side, cautiously passing through. They knew, for now, they were safe.</p>
+                <p>Same week, at the Lion Footprint Forum 2025: Our EWCL team presented our human-lion conflict survey findings and co-facilitated a convening of lion conservation practitioners from across Africa</p>
+              </div>
+              <p class="field-signature">— Z.</p>
+            </div>
+          </div>
         </div>
-        <h3 class="field-headline">A leopard at the riverbank, and a Forum for the future of lions</h3>
-        <div class="field-images cols-2">
-          <figure class="field-image-wrap" data-filename="field-entry-1a.jpeg">
-            <img src="field-entry-1a.jpeg" alt="Leopard watching impala across the river at dusk" onerror="this.style.display='none';">
-          </figure>
-          <figure class="field-image-wrap" data-filename="field-entry-1b.jpeg">
-            <img src="field-entry-1b.jpeg" alt="EWCL team smiling together at LFF 2025" onerror="this.style.display='none';">
-          </figure>
-        </div>
-        <div class="field-notes">
-          <p>We quietly watched this leopardess hold the riverbank at golden hour — six puku on the far side, cautiously passing through. They knew, for now, they were safe.</p>
-          <p>Same week, at the Lion Footprint Forum 2025: Our EWCL team presented our human-lion conflict survey findings and co-facilitated a convening of lion conservation practitioners from across Africa</p>
-        </div>
-        <p class="field-signature">— Z.</p>
-      </article>
+      </details>
 
       <!-- ENTRY 2 -->
-      <article class="field-entry">
-        <div class="field-entry-tape" aria-hidden="true"></div>
-        <div class="field-entry-header">
-          <span class="field-flag" role="img" aria-label="Namibia">🇳🇦</span>
-          <span class="field-location">Namibia · Otjiwarongo</span>
-          <span class="field-date">June '16</span>
+      <details class="field-entry">
+        <summary>
+          <div class="field-tab">
+            <span class="field-num">No. 02</span>
+            <span class="field-tab-flag" role="img" aria-label="Namibia">🇳🇦</span>
+            <span class="field-tab-location">Namibia · Otjiwarongo</span>
+            <span class="field-tab-preview">The world’s fastest land animal, frozen in a moment</span>
+            <span class="field-tab-chevron" aria-hidden="true">▼</span>
+          </div>
+        </summary>
+        <div class="field-content">
+          <div class="field-content-inner">
+            <div class="field-paper">
+              <div class="field-meta">
+                <span class="field-date">June '16</span>
+              </div>
+              <h3 class="field-headline">The world’s fastest land animal, frozen in a moment</h3>
+              <div class="field-images cols-1">
+                <figure class="field-image-wrap" data-filename="field-entry-2a.jpeg">
+                  <img src="field-entry-2a.jpeg" alt="" onerror="this.style.display='none';">
+                </figure>
+              </div>
+              <div class="field-notes">
+                <p>While working at the Cheetah Conservation Fund, I had the privilege of joining the lead field researchers to check in on a recently-leased, rehabilitated cheetah. Though she had sustained an injury to her eye, she was able to successfully re-establish a territory and thrive in the wild. A second after I took this photo, she locked eyes with me. In her, I saw the fierce strength and resilience of nature.</p>
+              </div>
+              <p class="field-signature">— Z.</p>
+            </div>
+          </div>
         </div>
-        <h3 class="field-headline">The world’s fastest land animal, frozen in a moment</h3>
-        <div class="field-images cols-1">
-          <figure class="field-image-wrap" data-filename="field-entry-2a.jpeg">
-            <img src="field-entry-2a.jpeg" alt="" onerror="this.style.display='none';">
-          </figure>
-        </div>
-        <div class="field-notes">
-          <p>While working at the Cheetah Conservation Fund, I had the privilege of joining the lead field researchers to check in on a recently-leased, rehabilitated cheetah. Though she had sustained an injury to her eye, she was able to successfully re-establish a territory and thrive in the wild. A second after I took this photo, she locked eyes with me. In her, I saw the fierce strength and resilience of nature.</p>
-        </div>
-        <p class="field-signature">— Z.</p>
-      </article>
+      </details>
 
       <!-- ENTRY 3 -->
-      <article class="field-entry">
-        <div class="field-entry-tape" aria-hidden="true"></div>
-        <div class="field-entry-header">
-          <span class="field-flag" role="img" aria-label="China">🇨🇳</span>
-          <span class="field-location">China · Chengdu</span>
-          <span class="field-date">May '19</span>
+      <details class="field-entry">
+        <summary>
+          <div class="field-tab">
+            <span class="field-num">No. 03</span>
+            <span class="field-tab-flag" role="img" aria-label="China">🇨🇳</span>
+            <span class="field-tab-location">China · Chengdu</span>
+            <span class="field-tab-preview">Panda Partners</span>
+            <span class="field-tab-chevron" aria-hidden="true">▼</span>
+          </div>
+        </summary>
+        <div class="field-content">
+          <div class="field-content-inner">
+            <div class="field-paper">
+              <div class="field-meta">
+                <span class="field-date">May '19</span>
+              </div>
+              <h3 class="field-headline">Panda Partners</h3>
+              <div class="field-images cols-2">
+                <figure class="field-image-wrap" data-filename="field-entry-3a.jpeg">
+                  <img src="field-entry-3a.jpeg" alt="" onerror="this.style.display='none';">
+                </figure>
+                <figure class="field-image-wrap" data-filename="field-entry-3b.jpeg">
+                  <img src="field-entry-3b.jpeg" alt="" onerror="this.style.display='none';">
+                </figure>
+              </div>
+              <div class="field-notes">
+                <p>Pictured left: Though we often showcase the animals we work so hard to save, there are countless conservationists working hard behind the scenes to make it so. One of my favorite aspects of my time in China was working with the amazing team at the Chengdu Panda Base. I miss them all the time. This was pre-COVID19; the world was a different place. I loved China and hope to work there again someday. Being part of the special Smithsonian-CPB partnership still remains one of my proudest life moments.</p>
+                <p>Pictured right: Few people have ever seen a giant panda in-person. Even fewer have seen them in the wild. I’m unbelievably grateful to have been part of a monitoring visit for a young female who lived deep within the mountains of southern China. My role was helping to train the field team on point-of-care diagnostic testing to evaluate wild panda health.</p>
+              </div>
+              <p class="field-signature">— Z.</p>
+            </div>
+          </div>
         </div>
-        <h3 class="field-headline">Panda Partners</h3>
-        <div class="field-images cols-2">
-          <figure class="field-image-wrap" data-filename="field-entry-3a.jpeg">
-            <img src="field-entry-3a.jpeg" alt="" onerror="this.style.display='none';">
-          </figure>
-          <figure class="field-image-wrap" data-filename="field-entry-3b.jpeg">
-            <img src="field-entry-3b.jpeg" alt="" onerror="this.style.display='none';">
-          </figure>
-        </div>
-        <div class="field-notes">
-          <p>Pictured left: Though we often showcase the animals we work so hard to save, there are countless conservationists working hard behind the scenes to make it so. One of my favorite aspects of my time in China was working with the amazing team at the Chengdu Panda Base. I miss them all the time. This was pre-COVID19; the world was a different place. I loved China and hope to work there again someday. Being part of the special Smithsonian-CPB partnership still remains one of my proudest life moments.</p>
-          <p>Pictured right: Few people have ever seen a giant panda in-person. Even fewer have seen them in the wild. I’m unbelievably grateful to have been part of a monitoring visit for a young female who lived deep within the mountains of southern China. My role was helping to train the field team on point-of-care diagnostic testing to evaluate wild panda health.</p>
-        </div>
-        <p class="field-signature">— Z.</p>
-      </article>
+      </details>
 
       <!-- ENTRY 4 -->
-      <article class="field-entry">
-        <div class="field-entry-tape" aria-hidden="true"></div>
-        <div class="field-entry-header">
-          <span class="field-flag" role="img" aria-label="Belize">🇧🇿</span>
-          <span class="field-location">Belize · La Democracia</span>
-          <span class="field-date">Jan '16 & 17</span>
+      <details class="field-entry">
+        <summary>
+          <div class="field-tab">
+            <span class="field-num">No. 04</span>
+            <span class="field-tab-flag" role="img" aria-label="Belize">🇧🇿</span>
+            <span class="field-tab-location">Belize · La Democracia</span>
+            <span class="field-tab-preview">We live in a beautiful world!</span>
+            <span class="field-tab-chevron" aria-hidden="true">▼</span>
+          </div>
+        </summary>
+        <div class="field-content">
+          <div class="field-content-inner">
+            <div class="field-paper">
+              <div class="field-meta">
+                <span class="field-date">Jan '16 &amp; 17</span>
+              </div>
+              <h3 class="field-headline">WE LIVE IN A BEAUTIFUL WORLD!</h3>
+              <div class="field-images cols-2">
+                <figure class="field-image-wrap" data-filename="field-entry-4a.jpeg">
+                  <img src="field-entry-4a.jpeg" alt="" onerror="this.style.display='none';">
+                </figure>
+                <figure class="field-image-wrap" data-filename="field-entry-4b.jpeg">
+                  <img src="field-entry-4b.jpeg" alt="" onerror="this.style.display='none';">
+                </figure>
+              </div>
+              <div class="field-notes">
+                <p>This photo captures the first time I ever placed sutures in a patient. This is an albino coatimundi (Nasua narica) that had a wound on its paw. The Belize Zoo and Tropical Education Center is a national treasure and does fantastic conservation work throughout Belize. They invite veterinary students (like young Zack) to learn from their team about the spectacular animals of Belize while also providing top-quality veterinary care.</p>
+                <p>Dr. Sharon Matola founded the Belize Zoo in 1983 and dedicated the rest of her life to advocating for the wildlife of Belize while giving thousands of people (many of them Belizean) the opportunity to learn about and celebrate the natural world around them. Sharon’s legacy lives on through the ongoing education and conservation programs at the Belize Zoo, and in the hearts of everyone who knew her.  Sharon inspired people through her passionate stories, infectious love for nature, and quintessential signs (pictured here) at the zoo. I’m grateful to have shared moments with her over a couple Belikins and hope to return someday to support the team.</p>
+              </div>
+              <p class="field-signature">— Z.</p>
+            </div>
+          </div>
         </div>
-        <h3 class="field-headline">WE LIVE IN A BEAUTIFUL WORLD!</h3>
-        <div class="field-images cols-2">
-          <figure class="field-image-wrap" data-filename="field-entry-4a.jpeg">
-            <img src="field-entry-4a.jpeg" alt="" onerror="this.style.display='none';">
-          </figure>
-          <figure class="field-image-wrap" data-filename="field-entry-4b.jpeg">
-            <img src="field-entry-4b.jpeg" alt="" onerror="this.style.display='none';">
-          </figure>
-        </div>
-        <div class="field-notes">
-          <p>This photo captures the first time I ever placed sutures in a patient. This is an albino coatimundi (Nasua narica) that had a wound on its paw. The Belize Zoo and Tropical Education Center is a national treasure and does fantastic conservation work throughout Belize. They invite veterinary students (like young Zack) to learn from their team about the spectacular animals of Belize while also providing top-quality veterinary care.</p>
-          <p>Dr. Sharon Matola founded the Belize Zoo in 1983 and dedicated the rest of her life to advocating for the wildlife of Belize while giving thousands of people (many of them Belizean) the opportunity to learn about and celebrate the natural world around them. Sharon’s legacy lives on through the ongoing education and conservation programs at the Belize Zoo, and in the hearts of everyone who knew her.  Sharon inspired people through her passionate stories, infectious love for nature, and quintessential signs (pictured here) at the zoo. I’m grateful to have shared moments with her over a couple Belikins and hope to return someday to support the team.</p>
-        </div>
-        <p class="field-signature">— Z.</p>
-      </article>
+      </details>
 
       <!-- ENTRY 5 -->
-      <article class="field-entry">
-        <div class="field-entry-tape" aria-hidden="true"></div>
-        <div class="field-entry-header">
-          <span class="field-flag" role="img" aria-label="United States">🇺🇸</span>
-          <span class="field-location">California · Ventura County</span>
-          <span class="field-date">Aug '23</span>
+      <details class="field-entry">
+        <summary>
+          <div class="field-tab">
+            <span class="field-num">No. 05</span>
+            <span class="field-tab-flag" role="img" aria-label="United States">🇺🇸</span>
+            <span class="field-tab-location">California · Ventura County</span>
+            <span class="field-tab-preview">The silly side of a regal giant</span>
+            <span class="field-tab-chevron" aria-hidden="true">▼</span>
+          </div>
+        </summary>
+        <div class="field-content">
+          <div class="field-content-inner">
+            <div class="field-paper">
+              <div class="field-meta">
+                <span class="field-date">Aug '23</span>
+              </div>
+              <h3 class="field-headline">The silly side of a regal giant</h3>
+              <div class="field-images cols-2">
+                <figure class="field-image-wrap" data-filename="field-entry-5a.jpeg">
+                  <img src="field-entry-5a.jpeg" alt="" onerror="this.style.display='none';">
+                </figure>
+                <figure class="field-image-wrap" data-filename="field-entry-5b.jpeg">
+                  <img src="field-entry-5b.jpeg" alt="" onerror="this.style.display='none';">
+                </figure>
+              </div>
+              <div class="field-notes">
+                <p>When you see a bird with a 3-meter wingspan fly over your head, it’s hard to imagine through the awe that they can be quite goofy and curious. We often depict condors as a living relic of the Pleistocene, immemorially crucial to their ecosystems, and yet so threatened by humanity (and our lead ammo/sinkers). All of this is true, as is the fact that grandpa and grandma have a silly side. Here, a few curious individuals watch as we do our field work. The guy in the right photo decided to fly down from his perch to come stand by me and check out what I was doing. One of the many joys of my job is in experiencing each individual animal’s personality come through and, through mutual curiosity, communicating with one another.</p>
+              </div>
+              <p class="field-signature">— Z.</p>
+            </div>
+          </div>
         </div>
-        <h3 class="field-headline">The silly side of a regal giant</h3>
-        <div class="field-images cols-2">
-          <figure class="field-image-wrap" data-filename="field-entry-5a.jpeg">
-            <img src="field-entry-5a.jpeg" alt="" onerror="this.style.display='none';">
-          </figure>
-          <figure class="field-image-wrap" data-filename="field-entry-5b.jpeg">
-            <img src="field-entry-5b.jpeg" alt="" onerror="this.style.display='none';">
-          </figure>
-        </div>
-        <div class="field-notes">
-          <p>When you see a bird with a 3-meter wingspan fly over your head, it’s hard to imagine through the awe that they can be quite goofy and curious. We often depict condors as a living relic of the Pleistocene, immemorially crucial to their ecosystems, and yet so threatened by humanity (and our lead ammo/sinkers). All of this is true, as is the fact that grandpa and grandma have a silly side. Here, a few curious individuals watch as we do our field work. The guy in the right photo decided to fly down from his perch to come stand by me and check out what I was doing. One of the many joys of my job is in experiencing each individual animal’s personality come through and, through mutual curiosity, communicating with one another.</p>
-        </div>
-        <p class="field-signature">— Z.</p>
-      </article>
+      </details>
 
       <!-- ENTRY 6 -->
-      <article class="field-entry">
-        <div class="field-entry-tape" aria-hidden="true"></div>
-        <div class="field-entry-header">
-          <span class="field-flag" role="img" aria-label="Earth">🌍</span>
-          <span class="field-location">Pangolin Range · Multi-country</span>
-          <span class="field-date">Apr '26</span>
+      <details class="field-entry">
+        <summary>
+          <div class="field-tab">
+            <span class="field-num">No. 06</span>
+            <span class="field-tab-flag" role="img" aria-label="Earth">🌍</span>
+            <span class="field-tab-location">Pangolin Range · Multi-country</span>
+            <span class="field-tab-preview">Making a pitch for pangolins</span>
+            <span class="field-tab-chevron" aria-hidden="true">▼</span>
+          </div>
+        </summary>
+        <div class="field-content">
+          <div class="field-content-inner">
+            <div class="field-paper">
+              <div class="field-meta">
+                <span class="field-date">Apr '26</span>
+              </div>
+              <h3 class="field-headline">Making a pitch for pangolins</h3>
+              <div class="field-images cols-1">
+                <figure class="field-image-wrap" data-filename="field-entry-6a.jpeg">
+                  <img src="field-entry-6a.jpeg" alt="" onerror="this.style.display='none';">
+                </figure>
+              </div>
+              <div class="field-notes">
+                <p>As my career path has evolved and changed course, so too has my approach. I’ve learned over the years that, for better or worse, I don’t fit in a traditional box. Many veterinarians that seek to go the wildlife route build careers working for zoos/aquariums/parks or become epidemiologists. Neither path fit me, so I’ve come to terms with the (hard) fact that I need to blaze my own trail. It’s been downright difficult, but I am so grateful that this has led me to where I am today (Apr 2026): working as the Program Officer for Save Pangolins and partnering closely with some of my dearest colleagues/friends at WCN on a program designed to empower and uplift early-career pangolin conservationists around the world. Look out for the Rising Wildlife Leaders – Pangolin Cohort! Through this role, I get to directly support conservationists around the world, help guide the future of our efforts, and grow as a conservation leader. This gives me such joy and hope!</p>
+              </div>
+              <p class="field-signature">— Z.</p>
+            </div>
+          </div>
         </div>
-        <h3 class="field-headline">Making a pitch for pangolins</h3>
-        <div class="field-images cols-1">
-          <figure class="field-image-wrap" data-filename="field-entry-6a.jpeg">
-            <img src="field-entry-6a.jpeg" alt="" onerror="this.style.display='none';">
-          </figure>
-        </div>
-        <div class="field-notes">
-          <p>As my career path has evolved and changed course, so too has my approach. I’ve learned over the years that, for better or worse, I don’t fit in a traditional box. Many veterinarians that seek to go the wildlife route build careers working for zoos/aquariums/parks or become epidemiologists. Neither path fit me, so I’ve come to terms with the (hard) fact that I need to blaze my own trail. It’s been downright difficult, but I am so grateful that this has led me to where I am today (Apr 2026): working as the Program Officer for Save Pangolins and partnering closely with some of my dearest colleagues/friends at WCN on a program designed to empower and uplift early-career pangolin conservationists around the world. Look out for the Rising Wildlife Leaders – Pangolin Cohort! Through this role, I get to directly support conservationists around the world, help guide the future of our efforts, and grow as a conservation leader. This gives me such joy and hope!</p>
-        </div>
-        <p class="field-signature">— Z.</p>
-      </article>
+      </details>
 
     </div>
 
     <p class="field-add-note">⟶ More entries coming as the work continues.</p>
   </div>
+  <script>
+    (function(){
+      var shelf = document.querySelector('.field-shelf');
+      if (!shelf) return;
+      document.querySelectorAll('[data-field-action]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var open = btn.dataset.fieldAction === 'expand';
+          shelf.querySelectorAll('details.field-entry').forEach(function(d){ d.open = open; });
+        });
+      });
+    })();
+  </script>
 </section>
 
 <section class="research" id="research">
@@ -494,17 +706,17 @@
       <div class="resource-category">
         <p class="resource-cat-label">Organizations</p>
         <ul class="resource-list">
-          <li><a href="https://www.savepangolins.org" target="_blank">Save Pangolins</a><span class="resource-note">Protecting the world's most trafficked mammal through research, advocacy, and field programs.</span></li>
-          <li><a href="https://livingplanet.panda.org" target="_blank">WWF Living Planet Report</a><span class="resource-note">The most comprehensive ongoing measure of global biodiversity. Read the 2024 report.</span></li>
-          <li><a href="https://wildlifeleaders.org" target="_blank">Emerging Wildlife Conservation Leaders</a><span class="resource-note">A fellowship program connecting and training the next generation of conservation leaders.</span></li>
+          <li><a href="https://www.savepangolins.org/" target="_blank">Save Pangolins</a><span class="resource-note">Protecting the world's most trafficked mammal through research, advocacy, and field programs.</span></li>
+          <li><a href="https://livingplanet.panda.org/" target="_blank">WWF Living Planet Report</a><span class="resource-note">The most comprehensive ongoing measure of global biodiversity. Read the 2024 report.</span></li>
+          <li><a href="https://wildlifeleaders.org/" target="_blank">Emerging Wildlife Conservation Leaders</a><span class="resource-note">A fellowship program connecting and training the next generation of conservation leaders.</span></li>
         </ul>
       </div>
       <div class="resource-category">
         <p class="resource-cat-label">Tools for everyday decisions</p>
         <ul class="resource-list">
-          <li><a href="https://yuka.io" target="_blank">Yuka</a><span class="resource-note">Scan any grocery item to instantly understand its health impact and ingredient quality. One of the easiest ways to make better choices without needing a nutrition degree.</span></li>
+          <li><a href="https://yuka.io/" target="_blank">Yuka</a><span class="resource-note">Scan any grocery item to instantly understand its health impact and ingredient quality. One of the easiest ways to make better choices without needing a nutrition degree.</span></li>
           <li><a href="https://www.ewg.org/tapwater/" target="_blank">EWG Tap Water Database</a><span class="resource-note">Check what's actually in your tap water by zip code.</span></li>
-          <li><a href="https://www.goodonyou.eco" target="_blank">Good On You</a><span class="resource-note">Rates fashion brands on their environmental and labor practices. Because what you wear matters too.</span></li>
+          <li><a href="https://www.goodonyou.eco/" target="_blank">Good On You</a><span class="resource-note">Rates fashion brands on their environmental and labor practices. Because what you wear matters too.</span></li>
         </ul>
       </div>
     </div>
@@ -525,7 +737,7 @@
 
 <footer>
   <span class="footer-name">Zachary Dvornicky-Raymond, DVM · Southern California</span>
-  <span class="footer-note">Wildlife Veterinarian & Conservation Scientist</span>
+  <span class="footer-note">Wildlife Veterinarian &amp; Conservation Scientist</span>
 </footer>
 </body>
 </html>
