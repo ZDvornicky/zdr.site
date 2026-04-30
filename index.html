@@ -241,12 +241,353 @@
   .field-signature { font-family: 'Caveat', cursive; font-size: 1.15rem; color: rgba(42,58,85,0.6); padding-left: 4.75rem; margin-top: 1.5rem; font-style: italic; position: relative; z-index: 1; }
   .field-add-note { text-align: center; margin-top: 3rem; font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(74,63,47,0.5); letter-spacing: 0.2em; text-transform: uppercase; }
 
-  .research { background: var(--sand); }
-  .research-item { border-top: 1px solid rgba(74,63,47,0.2); padding: 2rem 0; display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start; }
-  .research-year { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--amber); letter-spacing: 0.1em; padding-top: 0.25rem; min-width: 48px; }
-  .research-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--forest); margin-bottom: 0.5rem; line-height: 1.4; }
-  .research-desc { font-size: 0.9rem; color: var(--bark); font-weight: 300; }
-  .research-journal { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--mist); letter-spacing: 0.08em; margin-top: 0.5rem; }
+  /* PUBLISHED RESEARCH — journal shelf */
+  .research { background: var(--sand); padding-bottom: 8rem; }
+  .research-intro { font-size: 1rem; color: #5a5a4a; max-width: 620px; margin-top: -1.25rem; margin-bottom: 1rem; font-weight: 300; line-height: 1.75; }
+
+  .shelf-stage { position: relative; margin: 3.5rem auto 0; max-width: 1080px; padding: 0; }
+  .shelf-wall {
+    position: relative;
+    background-color: #2a1a10;
+    background-image:
+      radial-gradient(ellipse at 20% 25%, rgba(140,90,55,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(90,55,30,0.20) 0%, transparent 60%),
+      repeating-linear-gradient(180deg, transparent 0, transparent 70px, rgba(255,255,255,0.012) 70px, rgba(255,255,255,0.012) 71px),
+      repeating-linear-gradient(180deg, transparent 0, transparent 26px, rgba(0,0,0,0.10) 26px, rgba(0,0,0,0.10) 27px),
+      repeating-linear-gradient(0deg, rgba(255,220,180,0.018) 0, rgba(255,220,180,0.018) 1px, transparent 1px, transparent 4px);
+    border-radius: 6px 6px 0 0;
+    padding-top: 90px;
+    padding-bottom: 60px;
+    border: 1px solid rgba(20,10,5,0.6);
+    border-bottom: none;
+    overflow: visible;
+    box-shadow:
+      inset 0 8px 20px rgba(0,0,0,0.45),
+      inset 0 -4px 8px rgba(0,0,0,0.35),
+      inset 8px 0 16px -8px rgba(0,0,0,0.4),
+      inset -8px 0 16px -8px rgba(0,0,0,0.4);
+  }
+  .shelf-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 2.5rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .shelf-board {
+    height: 36px;
+    position: relative;
+    background-color: #3a200f;
+    background-image:
+      /* depth shading — top edge catches a sliver of light, bottom recedes into shadow */
+      linear-gradient(180deg, rgba(255,225,180,0.16) 0%, rgba(255,225,180,0) 14%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.42) 92%, rgba(0,0,0,0.6) 100%),
+      /* very long, soft grain streaks running horizontally — varied opacity, never repeating exactly */
+      linear-gradient(180deg, transparent 0%, transparent 22%, rgba(255,225,180,0.03) 22.5%, transparent 23%, transparent 35%, rgba(0,0,0,0.05) 35.5%, transparent 36%, transparent 48%, rgba(255,225,180,0.025) 48.5%, transparent 49%, transparent 60%, rgba(0,0,0,0.06) 60.5%, transparent 61%, transparent 74%, rgba(255,225,180,0.02) 74.5%, transparent 75%, transparent 100%),
+      /* fine vertical wood-fiber striations — very subtle, irregular widths */
+      repeating-linear-gradient(90deg,
+        transparent 0, transparent 7px,
+        rgba(255,225,180,0.025) 7px, rgba(255,225,180,0.025) 7.5px,
+        transparent 7.5px, transparent 19px,
+        rgba(0,0,0,0.05) 19px, rgba(0,0,0,0.05) 19.6px,
+        transparent 19.6px, transparent 31px,
+        rgba(255,225,180,0.015) 31px, rgba(255,225,180,0.015) 31.4px,
+        transparent 31.4px, transparent 47px,
+        rgba(0,0,0,0.04) 47px, rgba(0,0,0,0.04) 47.6px,
+        transparent 47.6px, transparent 63px,
+        rgba(255,225,180,0.02) 63px, rgba(255,225,180,0.02) 63.5px,
+        transparent 63.5px, transparent 83px),
+      /* gentle warm/cool variation across length */
+      linear-gradient(90deg, rgba(110,70,35,0.10) 0%, rgba(60,35,18,0.04) 28%, rgba(95,58,28,0.10) 55%, rgba(55,30,15,0.06) 80%, rgba(85,50,25,0.08) 100%),
+      /* base walnut gradient — top to bottom */
+      linear-gradient(180deg, #5a3318 0%, #3a200f 55%, #20120a 100%);
+    box-shadow:
+      0 1px 0 rgba(255,225,180,0.16) inset,
+      0 -1px 0 rgba(0,0,0,0.65) inset,
+      0 8px 14px -4px rgba(0,0,0,0.5),
+      0 16px 26px -10px rgba(0,0,0,0.32);
+    z-index: 3;
+  }
+  /* Front-edge highlight (top edge of the plank catches light) */
+  .shelf-board::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1.5px;
+    background: linear-gradient(180deg, rgba(255,225,180,0.42) 0%, rgba(255,225,180,0.06) 100%);
+  }
+  /* Underside shadow (where the plank casts shadow down into the wall below) */
+  .shelf-board::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, transparent 100%);
+  }
+
+  /* Each journal: a clickable spine */
+  .journal {
+    position: static;
+    cursor: pointer;
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    transition: transform 0.3s ease;
+  }
+  .spine-wrap { position: relative; }
+  .journal:hover .spine { transform: translateY(-4px); }
+  .journal.is-open .spine { transform: translateY(-12px); box-shadow: 0 8px 16px -4px rgba(0,0,0,0.35), inset 1px 0 0 rgba(255,255,255,0.22), inset -1px 0 0 rgba(0,0,0,0.3); }
+  .journal:focus-visible { outline: none; }
+  .journal:focus-visible .spine { box-shadow: 0 0 0 2px var(--amber), 0 4px 8px rgba(0,0,0,0.2); }
+
+  .spine {
+    width: 60px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0 16px;
+    border-radius: 2px 2px 0 0;
+    box-shadow:
+      inset 0 0 0 1px rgba(0,0,0,0.55),
+      inset 6px 0 14px -6px rgba(255,255,255,0.22),
+      inset -6px 0 14px -6px rgba(0,0,0,0.55),
+      inset 0 -6px 14px -6px rgba(0,0,0,0.5),
+      0 4px 6px rgba(0,0,0,0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+    overflow: hidden;
+  }
+  /* Gold band — inset width, flat embossed style */
+  .spine-band {
+    position: relative;
+    width: 84%;
+    height: 4px;
+    background-image: linear-gradient(180deg,
+      rgba(0,0,0,0.45) 0%,
+      rgba(212,176,106,0.55) 25%,
+      rgba(255,224,168,0.92) 50%,
+      rgba(212,176,106,0.55) 75%,
+      rgba(0,0,0,0.45) 100%);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    border-radius: 0;
+    z-index: 2;
+  }
+  .spine-text-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0 16px;
+    gap: 14px;
+    position: relative;
+    z-index: 2;
+  }
+  .spine-title {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(232, 196, 130, 0.95);
+    letter-spacing: 0.03em;
+    text-align: center;
+    line-height: 1.15;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+  }
+  .spine-year {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(232, 196, 130, 0.72);
+    letter-spacing: 0.1em;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+  }
+
+  /* Cover variants — base color + leather curvature highlight */
+  .spine.cover-pangolins {
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 8%, rgba(255,255,255,0.10) 26%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.10) 72%, rgba(0,0,0,0.45) 100%),
+      repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 3px),
+      linear-gradient(180deg, #36563f 0%, #1d3225 100%);
+  }
+  .spine.cover-bigcats {
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 8%, rgba(255,255,255,0.12) 26%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.10) 72%, rgba(0,0,0,0.45) 100%),
+      repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 3px),
+      linear-gradient(180deg, #7d3327 0%, #44170f 100%);
+  }
+  .spine.cover-pandas {
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.04) 10%, rgba(255,255,255,0.18) 28%, rgba(255,255,255,0.04) 50%, rgba(0,0,0,0.06) 72%, rgba(0,0,0,0.30) 100%),
+      repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(80,55,30,0.07) 2px, rgba(80,55,30,0.07) 3px),
+      linear-gradient(180deg, #ead7b1 0%, #c2ad7e 100%);
+  }
+  .spine.cover-pandas .spine-title, .spine.cover-pandas .spine-year { color: #3a2812; text-shadow: 0 1px 0 rgba(255,240,210,0.5); }
+  .spine.cover-pandas .spine-band { background: linear-gradient(180deg, rgba(80,50,20,0.4) 0%, rgba(140,100,55,0.7) 50%, rgba(80,50,20,0.4) 100%); }
+  .spine.cover-birds {
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 8%, rgba(255,255,255,0.10) 26%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.10) 72%, rgba(0,0,0,0.45) 100%),
+      repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 3px),
+      linear-gradient(180deg, #527281 0%, #294250 100%);
+  }
+  .spine.cover-misc {
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 8%, rgba(255,255,255,0.10) 26%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.10) 72%, rgba(0,0,0,0.45) 100%),
+      repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 3px),
+      linear-gradient(180deg, #7a5530 0%, #432a14 100%);
+  }
+
+  /* Variable book heights */
+  .journal.h-tall .spine { height: 288px; }
+  .journal.h-medium .spine { height: 264px; }
+  .journal.h-short .spine { height: 244px; }
+  .journal.h-extra-tall .spine { height: 308px; }
+
+
+  /* The opened journal — the two-page spread */
+  .paper-spread {
+    position: absolute;
+    top: 100%;
+    left: 1rem; right: 1rem;
+    margin: 1.75rem auto 0;
+    max-width: 760px;
+    background: #fbf5e8;
+    border: 1px solid rgba(110,80,35,0.3);
+    border-radius: 3px;
+    box-shadow: 0 14px 28px -10px rgba(74,63,47,0.4), 0 28px 48px -22px rgba(74,63,47,0.32);
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .journal.is-open .paper-spread { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .paper-spread::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -6px; right: -6px;
+    height: 16px;
+    background: var(--cover-color, #6b2a1f);
+    clip-path: polygon(6px 100%, calc(100% - 6px) 100%, 100% 0, 0 0);
+    border-radius: 3px 3px 0 0;
+  }
+
+  .paper-pages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    min-height: 280px;
+  }
+  .paper-pages::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent 0%, rgba(74,63,47,0.32) 18%, rgba(74,63,47,0.32) 82%, transparent 100%);
+  }
+  .paper-pages::after {
+    content: "";
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: calc(100% + 40px);
+    background: linear-gradient(180deg, var(--cover-color, #6b2a1f) 0%, var(--cover-color, #6b2a1f) 92%, transparent 100%);
+    filter: brightness(0.85);
+    z-index: 2;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  }
+  .paper-page {
+    padding: 2.25rem 2.5rem 2rem;
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, rgba(192,165,90,0.10) 27px, rgba(192,165,90,0.10) 28px);
+    background-size: 100% 28px;
+    background-position: 0 3rem;
+    background-repeat: repeat;
+  }
+  .paper-page-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--bark);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .paper-page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--forest);
+    line-height: 1.3;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+  }
+  .paper-page-publisher {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--mist);
+    letter-spacing: 0.08em;
+    margin-top: auto;
+    padding-top: 1.5rem;
+  }
+  .paper-page-abstract-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--bark);
+    margin-bottom: 1rem;
+  }
+  .paper-page-abstract {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: #3a2f1c;
+    line-height: 1.7;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+  }
+  .paper-page-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    text-decoration: none;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border-bottom: 1px solid rgba(200,137,58,0.35);
+    padding-bottom: 0.18rem;
+    transition: gap 0.25s ease, border-color 0.2s ease;
+  }
+  .paper-page-link:hover { gap: 0.85rem; border-color: var(--amber); }
+
+  .shelf-hint {
+    text-align: center;
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(74,63,47,0.45);
+    transition: opacity 0.3s ease;
+  }
+  .shelf-stage.has-open ~ .shelf-hint { opacity: 0; }
+
+  /* Hidden content lives inside each journal — JS reads it on click */
+  .journal .paper-data { display: none; }
 
   .resources { background: var(--cream); }
   .resources-intro { font-size: 1rem; color: #5a5a4a; max-width: 600px; margin-bottom: 3rem; font-weight: 300; }
@@ -286,6 +627,56 @@
     .field-paper::before { left: 1.5rem; }
     .field-meta, .field-headline, .field-images, .field-notes, .field-signature { padding-left: 2.25rem; }
     .field-images.cols-2, .field-images.cols-3 { grid-template-columns: 1fr 1fr; }
+
+    /* Research shelf — collapse to vertical flush stack while keeping wall + board */
+    .shelf-stage { padding: 0; }
+    .shelf-wall { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .shelf-row { flex-direction: column; gap: 0; padding: 0 1.25rem; align-items: stretch; }
+    .journal { width: 100%; }
+    .spine-wrap { width: 100%; }
+    .spine, .journal.h-tall .spine, .journal.h-medium .spine, .journal.h-short .spine, .journal.h-extra-tall .spine {
+      width: 100%;
+      height: auto;
+      min-height: 60px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.95rem 1.25rem 1.4rem;
+      border-radius: 0;
+      gap: 1rem;
+    }
+    .spine-band { display: none; }
+    .spine-text-wrap { flex-direction: row; align-items: center; padding: 0; gap: 1rem; flex: 1; }
+    .spine-title { writing-mode: horizontal-tb; transform: none; font-size: 1rem; flex: 1; justify-content: flex-start; text-align: left; line-height: 1.3; }
+    .spine-year { writing-mode: horizontal-tb; transform: none; font-size: 10px; opacity: 0.78; }
+    .journal:hover .spine, .journal.is-open .spine { transform: none; }
+    .paper-spread {
+      position: static;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      margin: 0;
+      max-width: none;
+      box-shadow: none;
+      border: none;
+      border-top: 1px solid rgba(110,80,35,0.25);
+      display: none;
+      border-radius: 0;
+    }
+    .journal.is-open .paper-spread { display: block; }
+    .paper-spread::before { display: none; }
+    .paper-pages { grid-template-columns: 1fr; min-height: 0; }
+    .paper-pages::before { display: none; }
+    .paper-pages::after {
+      top: 0;
+      height: 100%;
+      width: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .paper-page { padding: 1.5rem 1.5rem 1.25rem; }
+    .paper-page-publisher { padding-top: 1rem; }
+    .shelf-hint { display: none; }
   }
   @media (max-width: 600px) {
     nav { padding: 1rem 1.25rem; }
@@ -296,6 +687,10 @@
     .field-images.cols-2, .field-images.cols-3 { grid-template-columns: 1fr; }
     .field-headline { font-size: 1.25rem; }
     .field-notes { font-size: 1.2rem; }
+    .paper-page { padding: 1.25rem 1.1rem 1rem; }
+    .paper-page-title { font-size: 1.15rem; }
+    .spine, .journal.h-tall .spine, .journal.h-medium .spine, .journal.h-short .spine, .journal.h-extra-tall .spine { padding: 0.7rem 1rem; }
+    .spine-title { font-size: 0.95rem; }
   }
 </style>
 </head>
@@ -697,27 +1092,255 @@
   <span class="banner-credit">Original photography, ZDR</span>
 </aside>
 
+<!--
+  ============================================================================
+  PUBLISHED RESEARCH — journal shelf
+  ----------------------------------------------------------------------------
+  Each journal is a <button class="journal"> on the shelf. Click toggles its
+  open state — the spine lifts and a two-page abstract spread appears below
+  the shelf. Only one journal opens at a time. Click outside or click the
+  same spine again to close.
+
+  Heights vary for natural shelf rhythm: h-extra-tall, h-tall, h-medium, h-short.
+  Cover colors come from the .cover-* classes on .spine plus the inline
+  --cover-color custom property on .paper-spread (which paints the angled
+  cover edge above the open pages).
+
+  Sort order: chronological, oldest → ongoing (left → right).
+
+  Atmospheric props (pangolin, panda, camera) are decorative inline SVGs.
+  The pangolin is parented to the Pangolins journal so it perches on top of
+  that book. Hidden on mobile breakpoint where the shelf collapses to a card stack.
+
+  To add a new entry: copy any <button class="journal"> block, update spine
+  text + cover color + paper-spread content. Add the new cover-* class to CSS
+  if it's a new topic.
+
+  Items marked [verify] are scaffolds for Zack to confirm/edit specifics.
+  ============================================================================
+-->
 <section class="research" id="research">
   <div class="container">
     <p class="section-label">Published Research</p>
-    <h2 class="section-heading">Peer-reviewed work<br>and field contributions.</h2>
-    <div class="research-item">
-      <span class="research-year">2021</span>
-      <div>
-        <p class="research-title">Validation of a portable point-of-care test for pregnancy diagnosis in non-domestic ruminants</p>
-        <p class="research-desc">Assessed pregnancy-associated glycoprotein (PAG) detection across four ungulate species at White Oak Conservation Center — gerenuk, eastern giant eland, dama gazelle, and okapi. The test demonstrated 100% sensitivity and specificity in gerenuk and eland, with potential applications for field-based herd health monitoring, genetic management, and species conservation programs.</p>
-        <p class="research-journal">Journal of Zoo and Wildlife Medicine · Cornell University College of Veterinary Medicine</p>
-      </div>
-    </div>
-    <div class="research-item">
-      <span class="research-year">Ongoing</span>
-      <div>
-        <p class="research-title">One Health approaches to pangolin conservation and trafficking interdiction</p>
-        <p class="research-desc">Applied research in support of Save Pangolins' mission to protect all eight pangolin species. Focuses on the intersection of wildlife health, trade networks, community livelihoods, and international conservation policy.</p>
-        <p class="research-journal">Save Pangolins · IUCN SSC Pangolin Specialist Group</p>
-      </div>
-    </div>
+    <h2 class="section-heading">A small library<br>of work in progress.</h2>
+    <p class="research-intro">A selection of papers, reviews, field reports, and ongoing research across wildlife health, One Health, and species conservation. Click any volume to pull it forward and read the abstract.</p>
   </div>
+
+  <div class="container">
+    <div class="shelf-stage">
+      <div class="shelf-wall">
+        <div class="shelf-row">
+
+          <!-- ENTRY 1 — Tiger review -->
+          <button class="journal h-medium" type="button">
+            <div class="spine-wrap">
+              <div class="spine cover-bigcats">
+                <span class="spine-band"></span>
+                <div class="spine-text-wrap">
+                  <span class="spine-title">Tiger review</span>
+                  <span class="spine-year">undated</span>
+                </div>
+                <span class="spine-band"></span>
+              </div>
+            </div>
+            <div class="paper-spread" style="--cover-color: #6b2a1f;">
+              <div class="paper-pages">
+                <div class="paper-page">
+                  <p class="paper-page-meta">[ verify year ] · co-authored review</p>
+                  <h3 class="paper-page-title">A comprehensive review of health and disease in wild tigers and their prey</h3>
+                  <p class="paper-page-publisher">Cornell University Wildlife Health Center · [ verify publisher ]</p>
+                </div>
+                <div class="paper-page">
+                  <p class="paper-page-abstract-label">— abstract —</p>
+                  <p class="paper-page-abstract">Co-authored synthesis on what is known — and what remains unknown — about disease ecology in wild tiger populations and their prey species, intended to inform global conservation planning across the tiger range. [ verify abstract details / authorship ]</p>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <!-- ENTRY 2 — Panda partnership (2019) -->
+          <button class="journal h-tall" type="button">
+            <div class="spine-wrap">
+              <div class="spine cover-pandas">
+                <span class="spine-band"></span>
+                <div class="spine-text-wrap">
+                  <span class="spine-title">Panda partnership</span>
+                  <span class="spine-year">2019</span>
+                </div>
+                <span class="spine-band"></span>
+              </div>
+            </div>
+            <div class="paper-spread" style="--cover-color: #c9b58a;">
+              <div class="paper-pages">
+                <div class="paper-page">
+                  <p class="paper-page-meta">2019 · field report</p>
+                  <h3 class="paper-page-title">Field-based health monitoring of wild giant pandas — a Smithsonian–Chengdu partnership</h3>
+                  <p class="paper-page-publisher">Smithsonian Conservation Biology Institute · Chengdu Research Base for Giant Panda Breeding</p>
+                </div>
+                <div class="paper-page">
+                  <p class="paper-page-abstract-label">— abstract —</p>
+                  <p class="paper-page-abstract">Trained the joint SCBI–Chengdu Panda Base field team on point-of-care diagnostic testing during the first formal collaboration between the two institutions. Focused on disease surveillance for wild and reintroduction-candidate pandas in southern China. [ verify if associated peer-reviewed publication / preprint ]</p>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <!-- ENTRY 3 — PAG diagnostics (2021) -->
+          <button class="journal h-medium" type="button">
+            <div class="spine-wrap">
+              <div class="spine cover-misc">
+                <span class="spine-band"></span>
+                <div class="spine-text-wrap">
+                  <span class="spine-title">PAG diagnostics</span>
+                  <span class="spine-year">2021</span>
+                </div>
+                <span class="spine-band"></span>
+              </div>
+            </div>
+            <div class="paper-spread" style="--cover-color: #6b4a2a;">
+              <div class="paper-pages">
+                <div class="paper-page">
+                  <p class="paper-page-meta">2021 · peer-reviewed paper</p>
+                  <h3 class="paper-page-title">Validation of a portable point-of-care test for pregnancy diagnosis in non-domestic ruminants</h3>
+                  <p class="paper-page-publisher">Journal of Zoo and Wildlife Medicine · Cornell University College of Veterinary Medicine</p>
+                </div>
+                <div class="paper-page">
+                  <p class="paper-page-abstract-label">— abstract —</p>
+                  <p class="paper-page-abstract">Assessed pregnancy-associated glycoprotein (PAG) detection across four ungulate species at White Oak Conservation Center — gerenuk, eastern giant eland, dama gazelle, and okapi. The test demonstrated 100% sensitivity and specificity in gerenuk and eland, with potential applications for field-based herd health monitoring, genetic management, and species conservation programs.</p>
+                  <!-- <a href="[ paper URL ]" class="paper-page-link" target="_blank" rel="noopener">Read paper →</a> -->
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <!-- ENTRY 4 — Condor HPAI (2023) -->
+          <button class="journal h-short" type="button">
+            <div class="spine-wrap">
+              <div class="spine cover-birds">
+                <span class="spine-band"></span>
+                <div class="spine-text-wrap">
+                  <span class="spine-title">Condor HPAI</span>
+                  <span class="spine-year">2023</span>
+                </div>
+                <span class="spine-band"></span>
+              </div>
+            </div>
+            <div class="paper-spread" style="--cover-color: #4a6a78;">
+              <div class="paper-pages">
+                <div class="paper-page">
+                  <p class="paper-page-meta">2023 · field response</p>
+                  <h3 class="paper-page-title">Multi-institutional response to highly pathogenic avian influenza in California condors</h3>
+                  <p class="paper-page-publisher">California Condor Recovery Program · San Diego Zoo Safari Park</p>
+                </div>
+                <div class="paper-page">
+                  <p class="paper-page-abstract-label">— abstract —</p>
+                  <p class="paper-page-abstract">Contributed to the consortium emergency response during the 2022–2023 H5N1 outbreak — integrating field surveillance, vaccination protocols, and clinical care across recovery sites. Work spanned the San Diego Zoo Safari Park and partner organizations within the California Condor Recovery Program. [ verify if peer-reviewed paper exists / link ]</p>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <!-- ENTRY 5 — Lion Footprint Forum (2025) -->
+          <button class="journal h-extra-tall" type="button">
+            <div class="spine-wrap">
+              <div class="spine cover-bigcats">
+                <span class="spine-band"></span>
+                <div class="spine-text-wrap">
+                  <span class="spine-title">Lion Footprint Forum</span>
+                  <span class="spine-year">2025</span>
+                </div>
+                <span class="spine-band"></span>
+              </div>
+            </div>
+            <div class="paper-spread" style="--cover-color: #6b2a1f;">
+              <div class="paper-pages">
+                <div class="paper-page">
+                  <p class="paper-page-meta">2025 · conference presentation</p>
+                  <h3 class="paper-page-title">Findings from a multi-country survey on human-lion conflict mitigation</h3>
+                  <p class="paper-page-publisher">Lion Footprint Forum 2025 · Emerging Wildlife Conservation Leaders</p>
+                </div>
+                <div class="paper-page">
+                  <p class="paper-page-abstract-label">— abstract —</p>
+                  <p class="paper-page-abstract">Presented at the Lion Footprint Forum 2025 alongside EWCL Class 10 collaborators. Surveyed lion conservation practitioners across the African range on conflict prevention, livestock guarding, and community-led management approaches — distilling lessons that cross national and ecosystem boundaries.</p>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <!-- ENTRY 6 — Pangolins (ongoing) -->
+          <button class="journal h-medium" type="button">
+            <div class="spine-wrap">
+              <div class="spine cover-pangolins">
+                <span class="spine-band"></span>
+                <div class="spine-text-wrap">
+                  <span class="spine-title">Pangolins</span>
+                  <span class="spine-year">ongoing</span>
+                </div>
+                <span class="spine-band"></span>
+              </div>
+            </div>
+            <div class="paper-spread" style="--cover-color: #2d4a3a;">
+              <div class="paper-pages">
+                <div class="paper-page">
+                  <p class="paper-page-meta">ongoing · applied research</p>
+                  <h3 class="paper-page-title">One Health approaches to pangolin conservation and trafficking interdiction</h3>
+                  <p class="paper-page-publisher">Save Pangolins · IUCN SSC Pangolin Specialist Group</p>
+                </div>
+                <div class="paper-page">
+                  <p class="paper-page-abstract-label">— abstract —</p>
+                  <p class="paper-page-abstract">Applied research in support of Save Pangolins' mission to protect all eight pangolin species. Focuses on the intersection of wildlife health, trade networks, community livelihoods, and international conservation policy.</p>
+                  <a href="https://www.savepangolins.org/" class="paper-page-link" target="_blank" rel="noopener">Learn more  →</a>
+                </div>
+              </div>
+            </div>
+          </button>
+
+
+        </div>
+        <div class="shelf-board"></div>
+      </div>
+    </div>
+
+    <p class="shelf-hint">Click any volume to read</p>
+  </div>
+
+  <script>
+    (function(){
+      var stage = document.querySelector('.shelf-stage');
+      if (!stage) return;
+      var journals = stage.querySelectorAll('.journal');
+
+      function closeAll(){
+        journals.forEach(function(j){ j.classList.remove('is-open'); });
+        stage.classList.remove('has-open');
+      }
+      function open(j){
+        journals.forEach(function(o){ o.classList.toggle('is-open', o === j); });
+        stage.classList.add('has-open');
+      }
+
+      journals.forEach(function(j){
+        j.addEventListener('click', function(e){
+          // Don't toggle when clicking a link inside the open spread
+          if (e.target.closest('a')) return;
+          if (j.classList.contains('is-open')) closeAll();
+          else open(j);
+        });
+      });
+
+      // Click outside the shelf-stage closes
+      document.addEventListener('click', function(e){
+        if (!stage.contains(e.target) && stage.classList.contains('has-open')) {
+          closeAll();
+        }
+      });
+
+      // Escape closes
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && stage.classList.contains('has-open')) closeAll();
+      });
+    })();
+  </script>
 </section>
 
 <section class="resources" id="resources">
