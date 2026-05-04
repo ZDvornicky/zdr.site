@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root { --forest: #1a2318; --moss: #2d3d28; --bark: #4a3f2f; --amber: #c8893a; --sand: #e8d5b0; --cream: #f4ede0; --mist: #8a9e82; --text: #2a2a22; --light: #f9f5ee; --ink: #2a3a55; --paper: #fdfaf0; --paper-shade: #f4ecd6; --rule: rgba(120, 140, 170, 0.20); --margin-rule: rgba(192, 90, 80, 0.30); }
@@ -589,16 +589,192 @@
   /* Hidden content lives inside each journal — JS reads it on click */
   .journal .paper-data { display: none; }
 
-  .resources { background: var(--cream); }
-  .resources-intro { font-size: 1rem; color: #5a5a4a; max-width: 600px; margin-bottom: 3rem; font-weight: 300; }
-  .resources-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(74,63,47,0.12); }
-  .resource-category { background: var(--light); padding: 2rem; }
-  .resource-cat-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.25rem; }
-  .resource-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-  .resource-list li { font-size: 0.9rem; color: var(--text); display: flex; flex-direction: column; gap: 0.15rem; }
-  .resource-list a { color: var(--forest); text-decoration: none; font-weight: 500; border-bottom: 1px solid rgba(74,63,47,0.2); display: inline; line-height: 1.5; transition: color 0.2s, border-color 0.2s; }
-  .resource-list a:hover { color: var(--amber); border-color: var(--amber); }
-  .resource-note { font-size: 0.78rem; color: var(--mist); font-weight: 300; }
+  /* RESOURCES — leather desk surface holds a parchment paper card */
+  .resources {
+    position: relative;
+    padding: 5rem 1.5rem 6rem;
+    background-color: #2a1c10;
+    background-image:
+      /* Fine leather grain noise */
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='l'><feTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' stitchTiles='stitch' seed='4'/><feColorMatrix values='0 0 0 0 0.18 0 0 0 0 0.12 0 0 0 0 0.06 0 0 0 0.6 0'/></filter><rect width='200' height='200' filter='url(%23l)'/></svg>"),
+      /* Mid-frequency leather mottling */
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='lm'><feTurbulence type='fractalNoise' baseFrequency='0.03' numOctaves='3' stitchTiles='stitch' seed='12'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.10 0 0 0 0 0.05 0 0 0 0.30 0'/></filter><rect width='600' height='600' filter='url(%23lm)'/></svg>"),
+      /* Warm pooling and shadow gradient */
+      radial-gradient(ellipse at 22% 30%, rgba(110,65,28,0.20) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 75%, rgba(60,32,12,0.30) 0%, transparent 65%),
+      /* Base leather color gradient */
+      linear-gradient(180deg, #3a2716 0%, #1f1308 100%);
+    background-size: 200px 200px, 600px 600px, 100% 100%, 100% 100%, 100% 100%;
+    background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
+    box-shadow:
+      inset 0 8px 24px rgba(0,0,0,0.5),
+      inset 0 -8px 16px rgba(0,0,0,0.4);
+    overflow: hidden;
+  }
+
+  /* Frame wrapper — holds the drop-shadow that follows the masked paper silhouette */
+  .resources-paper-frame {
+    max-width: 1080px;
+    margin: 0 auto;
+    filter:
+      drop-shadow(0 1px 0 rgba(255,225,180,0.18))
+      drop-shadow(0 3px 6px rgba(0,0,0,0.40))
+      drop-shadow(0 14px 26px rgba(0,0,0,0.42))
+      drop-shadow(0 32px 52px rgba(0,0,0,0.40));
+  }
+
+  /* The parchment paper — real photo with wavy mask + weathered edge darkening */
+  .resources-paper {
+    position: relative;
+    padding: 5rem 3.5rem 5.5rem;
+    background-color: #e6d2a4;
+    background-image:
+      /* Reading-area wash — subtle center lightening, deeper warm cream */
+      radial-gradient(ellipse 88% 78% at 50% 50%, rgba(232,215,170,0.55) 0%, rgba(232,215,170,0.36) 35%, rgba(232,215,170,0.16) 60%, transparent 82%),
+      /* Parchment photo */
+      url("parchment-paper.jpg");
+    background-size: 100% 100%, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Wavy mask — high-resolution displacement field + light Gaussian blur to anti-alias quantization without softening the edge silhouette */
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3600 2160' preserveAspectRatio='none'><filter id='e' x='-2%25' y='-2%25' width='104%25' height='104%25'><feTurbulence type='fractalNoise' baseFrequency='0.0028 0.006' numOctaves='6' seed='5' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='62' result='d'/><feGaussianBlur in='d' stdDeviation='1.0'/></filter><rect x='40' y='40' width='3520' height='2080' fill='white' filter='url(%23e)'/></svg>");
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3600 2160' preserveAspectRatio='none'><filter id='e' x='-2%25' y='-2%25' width='104%25' height='104%25'><feTurbulence type='fractalNoise' baseFrequency='0.0028 0.006' numOctaves='6' seed='5' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='62' result='d'/><feGaussianBlur in='d' stdDeviation='1.0'/></filter><rect x='40' y='40' width='3520' height='2080' fill='white' filter='url(%23e)'/></svg>");
+    -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+            mask-position: center;
+  }
+  .resources-intro { font-size: 1rem; color: #4a3a22; max-width: 620px; margin-top: -1.25rem; margin-bottom: 1rem; font-weight: 400; line-height: 1.75; font-family: 'Playfair Display', serif; font-style: italic; }
+
+  .resources-stack { margin-top: 2.5rem; position: relative; z-index: 2; }
+
+  .resources-band {
+    position: relative;
+    padding: 2rem 0 2rem;
+    border-top: 1px solid rgba(120,90,40,0.30);
+  }
+  .resources-band:last-child {
+    border-bottom: 1px solid rgba(120,90,40,0.30);
+  }
+  .resources-band-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .cat-ink {
+    position: relative;
+    flex-shrink: 0;
+    width: 11px;
+    height: 11px;
+    border-radius: 52% 48% 50% 50% / 48% 52% 50% 50%;
+    background: var(--ink);
+    background-image: radial-gradient(circle at 38% 32%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 28%, transparent 50%);
+    box-shadow:
+      0 0 0 0.5px rgba(0,0,0,0.15),
+      0 0 1px 0.5px var(--ink),
+      0 0 4px 1px var(--ink-bleed);
+    transform: translateY(-1px) rotate(8deg);
+  }
+  .cat-ink::before {
+    /* Soft ink halo / feather */
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: var(--ink);
+    opacity: 0.16;
+    filter: blur(2.5px);
+    z-index: -1;
+  }
+  .cat-ink::after {
+    /* Tiny secondary blot droplet */
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50% 60% 50% 50% / 60% 50% 50% 60%;
+    background: var(--ink);
+    opacity: 0.7;
+    bottom: -3px;
+    right: -4px;
+    filter: blur(0.3px);
+  }
+
+  .cat-books { --ink: #2d4a3a; --ink-bleed: rgba(45,74,58,0.20); }
+  .cat-watch { --ink: #6b2a1f; --ink-bleed: rgba(107,42,31,0.20); }
+  .cat-orgs  { --ink: #3a5269; --ink-bleed: rgba(58,82,105,0.20); }
+  .cat-tools { --ink: #5a3a1c; --ink-bleed: rgba(90,58,28,0.22); }
+
+  .cat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .cat-eyebrow {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #6b5a3a;
+    font-weight: 400;
+    flex: 1;
+  }
+
+  .resources-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.25rem 2.5rem;
+    padding-left: 1.75rem;
+  }
+  .resource-item { display: flex; flex-direction: column; gap: 0.35rem; }
+  .resource-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--forest);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(120,90,40,0.28);
+    align-self: flex-start;
+    padding-bottom: 0.12rem;
+    line-height: 1.3;
+    font-weight: 500;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .resource-title:hover { color: var(--amber); border-bottom-color: var(--amber); }
+  .resource-meta {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #6b5a3a;
+    font-weight: 400;
+  }
+  .resource-mono {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #8a7345;
+    font-weight: 400;
+  }
+  .resource-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: #3a2a14;
+    line-height: 1.65;
+    margin-top: 0.3rem;
+    font-weight: 400;
+  }
+  /* Slightly darker / higher-contrast scoped text overrides — only inside the parchment */
+  .resources-paper .section-label { color: #8e5618; }
+  .resources-paper .resources-intro { color: #3a2a14; }
+  .resources-paper .cat-eyebrow { color: #4a3a1f; }
+  .resources-paper .resource-meta { color: #4a3a1f; }
+  .resources-paper .resource-mono { color: #6b4a1f; }
+
 
   .connect { background: var(--forest); text-align: center; padding: 8rem 3rem; }
   .connect .section-heading { color: var(--cream); max-width: 500px; margin: 0 auto 1.5rem; }
@@ -617,7 +793,10 @@
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .about-left { position: static; max-width: 320px; }
     .affil-grid { grid-template-columns: 1fr 1fr; }
-    .resources-grid { grid-template-columns: 1fr; }
+    .resources { padding: 3rem 1rem 4rem; }
+    .resources-paper { padding: 3rem 2rem 3.5rem; }
+    .resources-items { grid-template-columns: 1fr 1fr; gap: 1.5rem 1.5rem; padding-left: 1rem; }
+    .cat-eyebrow { font-size: 0.88rem; }
     .marquee-track { gap: 2.25rem; }
     .marquee-species { font-size: 1.15rem; }
     .field-tab { grid-template-columns: auto auto 1fr auto; padding: 0.95rem 1rem 0.95rem 1.25rem; gap: 0.85rem; }
@@ -691,6 +870,13 @@
     .paper-page-title { font-size: 1.15rem; }
     .spine, .journal.h-tall .spine, .journal.h-medium .spine, .journal.h-short .spine, .journal.h-extra-tall .spine { padding: 0.7rem 1rem; }
     .spine-title { font-size: 0.95rem; }
+
+    /* Resources — collapse to single-column flow on narrow screens */
+    .resources { padding: 2.5rem 0.75rem 3.5rem; }
+    .resources-paper { padding: 2.5rem 1.25rem 3rem; }
+    .resources-items { grid-template-columns: 1fr; gap: 1.5rem; padding-left: 0.75rem; }
+    .resources-band-head { flex-wrap: wrap; gap: 0.6rem; }
+    .cat-eyebrow { flex: 1 1 100%; padding-left: 1.5rem; }
   }
 </style>
 </head>
@@ -1343,45 +1529,139 @@
   </script>
 </section>
 
+<!--
+  ============================================================================
+  RESOURCES — parchment page with stacked bands
+  ----------------------------------------------------------------------------
+  Each category is a horizontal band: hairline rule across the top, ink-blot
+  marker + mono category label + italic eyebrow phrase, then a 3-column flow
+  of items below.
+
+  Adding an item: copy any <article class="resource-item"> block within a band
+  and update title/href, meta line, and note.
+
+  Adding a category: copy a whole <article class="resources-band"> block. Pick
+  an ink color by adding cat-{books|watch|orgs|tools} or define a new variant
+  in the CSS with --ink and --ink-bleed values.
+  ============================================================================
+-->
 <section class="resources" id="resources">
+  <div class="resources-paper-frame">
+  <div class="resources-paper">
   <div class="container">
     <p class="section-label">Resources</p>
     <h2 class="section-heading">Things worth your time.</h2>
     <p class="resources-intro">A curated collection of the books, films, tools, and organizations that have shaped how I understand conservation — and how I think about what needs to change.</p>
-    <div class="resources-grid">
-      <div class="resource-category">
-        <p class="resource-cat-label">Books</p>
-        <ul class="resource-list">
-          <li><a href="https://www.robinwallkimmerer.com/books" target="_blank">Braiding Sweetgrass</a><span class="resource-note">Robin Wall Kimmerer — on plants, reciprocity, and what indigenous science knows that Western ecology is still learning.</span></li>
-          <li><a href="https://michaelpollan.com/books/the-omnivores-dilemma/" target="_blank">The Omnivore's Dilemma</a><span class="resource-note">Michael Pollan — if you eat food, this book is for you. The most important thing you can do for your health and the planet often starts at the grocery store.</span></li>
-          <li><a href="https://www.islandpress.org/books/wilding" target="_blank">Wilding</a><span class="resource-note">Isabella Tree — a firsthand account of rewilding a farm in England and what happens when you let nature lead.</span></li>
-        </ul>
-      </div>
-      <div class="resource-category">
-        <p class="resource-cat-label">Watch</p>
-        <ul class="resource-list">
-          <li><a href="https://www.netflix.com/title/81067635" target="_blank">Kiss the Ground</a><span class="resource-note">Netflix documentary on regenerative agriculture and the potential of healthy soil to reverse climate change.</span></li>
-          <li><a href="https://www.netflix.com/title/80216393" target="_blank">Our Planet</a><span class="resource-note">David Attenborough's landmark series on global biodiversity — the most beautiful and sobering thing on streaming.</span></li>
-          <li><a href="https://www.amazon.com/My-Octopus-Teacher/dp/B08M6BVFQ6" target="_blank">My Octopus Teacher</a><span class="resource-note">On attention, kinship, and what the natural world offers when you slow down enough to receive it.</span></li>
-        </ul>
-      </div>
-      <div class="resource-category">
-        <p class="resource-cat-label">Organizations</p>
-        <ul class="resource-list">
-          <li><a href="https://www.savepangolins.org/" target="_blank">Save Pangolins</a><span class="resource-note">Protecting the world's most trafficked mammal through research, advocacy, and field programs.</span></li>
-          <li><a href="https://livingplanet.panda.org/" target="_blank">WWF Living Planet Report</a><span class="resource-note">The most comprehensive ongoing measure of global biodiversity. Read the 2024 report.</span></li>
-          <li><a href="https://wildlifeleaders.org/" target="_blank">Emerging Wildlife Conservation Leaders</a><span class="resource-note">A fellowship program connecting and training the next generation of conservation leaders.</span></li>
-        </ul>
-      </div>
-      <div class="resource-category">
-        <p class="resource-cat-label">Tools for everyday decisions</p>
-        <ul class="resource-list">
-          <li><a href="https://yuka.io/" target="_blank">Yuka</a><span class="resource-note">Scan any grocery item to instantly understand its health impact and ingredient quality. One of the easiest ways to make better choices without needing a nutrition degree.</span></li>
-          <li><a href="https://www.ewg.org/tapwater/" target="_blank">EWG Tap Water Database</a><span class="resource-note">Check what's actually in your tap water by zip code.</span></li>
-          <li><a href="https://www.goodonyou.eco/" target="_blank">Good On You</a><span class="resource-note">Rates fashion brands on their environmental and labor practices. Because what you wear matters too.</span></li>
-        </ul>
-      </div>
+
+    <div class="resources-stack">
+
+      <!-- BOOKS -->
+      <article class="resources-band cat-books">
+        <header class="resources-band-head">
+          <span class="cat-ink" aria-hidden="true"></span>
+          <span class="cat-label">Books</span>
+          <span class="cat-eyebrow">What's shaped how I see the work.</span>
+        </header>
+        <div class="resources-items">
+          <article class="resource-item">
+            <a href="https://www.robinwallkimmerer.com/books" target="_blank" rel="noopener" class="resource-title">Braiding Sweetgrass</a>
+            <p class="resource-meta">Robin Wall Kimmerer</p>
+            <p class="resource-note">On plants, reciprocity, and what indigenous science knows that Western ecology is still learning.</p>
+          </article>
+          <article class="resource-item">
+            <a href="https://michaelpollan.com/books/the-omnivores-dilemma/" target="_blank" rel="noopener" class="resource-title">The Omnivore's Dilemma</a>
+            <p class="resource-meta">Michael Pollan</p>
+            <p class="resource-note">If you eat food, this book is for you. The most important thing you can do for your health and the planet often starts at the grocery store.</p>
+          </article>
+          <article class="resource-item">
+            <a href="https://www.islandpress.org/books/wilding" target="_blank" rel="noopener" class="resource-title">Wilding</a>
+            <p class="resource-meta">Isabella Tree</p>
+            <p class="resource-note">A firsthand account of rewilding a farm in England and what happens when you let nature lead.</p>
+          </article>
+        </div>
+      </article>
+
+      <!-- WATCH -->
+      <article class="resources-band cat-watch">
+        <header class="resources-band-head">
+          <span class="cat-ink" aria-hidden="true"></span>
+          <span class="cat-label">Watch</span>
+          <span class="cat-eyebrow">Documentaries worth two hours of your life.</span>
+        </header>
+        <div class="resources-items">
+          <article class="resource-item">
+            <a href="https://www.netflix.com/title/81067635" target="_blank" rel="noopener" class="resource-title">Kiss the Ground</a>
+            <p class="resource-mono">Netflix · 2020</p>
+            <p class="resource-note">Regenerative agriculture and the potential of healthy soil to reverse climate change.</p>
+          </article>
+          <article class="resource-item">
+            <a href="https://www.netflix.com/title/80216393" target="_blank" rel="noopener" class="resource-title">Our Planet</a>
+            <p class="resource-mono">Netflix · Attenborough</p>
+            <p class="resource-note">Landmark series on global biodiversity — the most beautiful and sobering thing on streaming.</p>
+          </article>
+          <article class="resource-item">
+            <a href="https://www.amazon.com/My-Octopus-Teacher/dp/B08M6BVFQ6" target="_blank" rel="noopener" class="resource-title">My Octopus Teacher</a>
+            <p class="resource-mono">Netflix · 2020</p>
+            <p class="resource-note">On attention, kinship, and what the natural world offers when you slow down enough to receive it.</p>
+          </article>
+        </div>
+      </article>
+
+      <!-- ORGANIZATIONS -->
+      <article class="resources-band cat-orgs">
+        <header class="resources-band-head">
+          <span class="cat-ink" aria-hidden="true"></span>
+          <span class="cat-label">Organizations</span>
+          <span class="cat-eyebrow">Where the actual work gets done.</span>
+        </header>
+        <div class="resources-items">
+          <article class="resource-item">
+            <a href="https://www.savepangolins.org/" target="_blank" rel="noopener" class="resource-title">Save Pangolins</a>
+            <p class="resource-mono">savepangolins.org</p>
+            <p class="resource-note">Protecting the world's most trafficked mammal through research, advocacy, and field programs.</p>
+          </article>
+          <article class="resource-item">
+            <a href="https://livingplanet.panda.org/" target="_blank" rel="noopener" class="resource-title">WWF Living Planet Report</a>
+            <p class="resource-mono">livingplanet.panda.org</p>
+            <p class="resource-note">The most comprehensive ongoing measure of global biodiversity. Read the 2024 report.</p>
+          </article>
+          <article class="resource-item">
+            <a href="https://wildlifeleaders.org/" target="_blank" rel="noopener" class="resource-title">Emerging Wildlife Conservation Leaders</a>
+            <p class="resource-mono">wildlifeleaders.org</p>
+            <p class="resource-note">Fellowship program connecting and training the next generation of conservation leaders.</p>
+          </article>
+        </div>
+      </article>
+
+      <!-- TOOLS -->
+      <article class="resources-band cat-tools">
+        <header class="resources-band-head">
+          <span class="cat-ink" aria-hidden="true"></span>
+          <span class="cat-label">Tools for everyday decisions</span>
+          <span class="cat-eyebrow">Small choices that add up.</span>
+        </header>
+        <div class="resources-items">
+          <article class="resource-item">
+            <a href="https://yuka.io/" target="_blank" rel="noopener" class="resource-title">Yuka</a>
+            <p class="resource-mono">grocery scanner</p>
+            <p class="resource-note">Scan any grocery item to instantly understand its health impact and ingredient quality. One of the easiest ways to make better choices without needing a nutrition degree.</p>
+          </article>
+          <article class="resource-item">
+            <a href="https://www.ewg.org/tapwater/" target="_blank" rel="noopener" class="resource-title">EWG Tap Water Database</a>
+            <p class="resource-mono">by zip code</p>
+            <p class="resource-note">Check what's actually in your tap water by zip code.</p>
+          </article>
+          <article class="resource-item">
+            <a href="https://www.goodonyou.eco/" target="_blank" rel="noopener" class="resource-title">Good On You</a>
+            <p class="resource-mono">fashion brand ratings</p>
+            <p class="resource-note">Rates fashion brands on their environmental and labor practices. Because what you wear matters too.</p>
+          </article>
+        </div>
+      </article>
+
     </div>
+  </div>
+  </div>
   </div>
 </section>
 
